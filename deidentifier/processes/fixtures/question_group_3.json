@@ -1,0 +1,37 @@
+[
+  {
+    "model": "processes.QuestionGroup",
+    "pk": 3,
+    "fields": {
+      "sequence_number": 3,
+      "title": " K-Anonymity",
+      "description": "The following questions will be used to to determine if the characteristics of their dataset that are related to K-Anonymity. ",
+      "help_tip": "Depending on the answers to these questions we will know whether to recommend further deidentification.",
+      "source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2528029/"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 302,
+    "fields": {
+      "question_group_id": 3,
+      "sequence_number": 1,
+      "question": "What is the current K-Anonymity of the dataset?",
+      "help_tip": "K-Anonymity is the minimum number of unique combinations of quazi-identifiers found in a dataset, if a single row has a unique combination quazi-identifiers, then the k-anonymity would be.",
+      "is_compulsory": true,
+      "answer_format": "integer"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 303,
+    "fields": {
+      "question_group_id": 3,
+      "sequence_number": 2,
+      "question": "What is the K-Anonymity of the dataset when combined with the larger dataset?",
+      "help_tip": " K-Anonymity is the minimum number of unique combinations of quazi-identifiers found in a dataset, if a single row has a unique combination quazi-identifiers, then the k-anonymity would be 1.",
+      "is_compulsory": true,
+      "answer_format": "integer"
+    }
+  }
+]

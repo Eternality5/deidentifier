@@ -1,0 +1,245 @@
+<div class= "header-report">
+    <h1>Dataset Risk Analysis Report</h1>
+    <div>
+        <p>
+            <i>
+                <b>Dataset:</b> {{ process_name }}
+            </i>
+        </p>
+        <p>
+            <i><b>Date: </b></i>
+            <i id="current_date">
+                <script>document.getElementById("current_date").innerHTML = new Date().toLocaleDateString();</script>
+            </i>
+        </p>
+        <p>
+            <b>Description: </b>
+            {{ process_description }}
+        </p>
+    </div>
+</div>
+
+<div class= "risk-report header2-report">
+    <div class="color-div-report">    
+    <h2 class="left-h2">Risks Present</h2>
+    </div>
+    <div>
+    <ol>
+        {% if unique_identification.unique_identifier %}
+            <li style="color: red;">
+                High Privacy Risk (Please remove all the unique identifier)
+            </li>
+        {% endif %}
+        {% if unique_identification.free_text %}
+            <li>
+                The free text can contain private information and it is recommended to completely remove it.
+            </li>
+        {% endif %}
+        {% if unique_identification.other_present %}
+            <li>
+                There are other possible in-direct identifier present in the data set.
+            </li>
+        {% endif %}
+        {% if persecutor_risk.present %}
+            <li>
+                Persecutor Risk
+            </li>
+        {% endif %}
+        {% if k_anonymity.sufficient_k == False %}
+            <li>
+                Low k-anonymity value
+            </li>
+        {% endif %}
+    </ol>
+</div>
+</div>
+
+{% if unique_identification.other_present %}
+<div class= "header2-report">
+    <div class="color-div-report">
+    <h2 class="left-h2"> Risk Associated with Indirect identifiers</h2>
+    </div>  
+    <div>
+    <p>
+        Indirect identifiers are data elements or attributes that, 
+        by themselves, do not directly identify a specific individual 
+        but can be used in combination with other information to indirectly 
+        or potentially identify someone.
+    </p>
+
+    {% if unique_identification.geo_present %}
+    <div class="data-div-report">
+        <p style="font-weight: bold;">
+            Possible geographic data present in the dataset that can be directly associated with the patent. 
+        </p>
+        <ul>
+            {% if unique_identification.geo_risk %}
+                {% for key, value in unique_identification.geo_risk.items %}
+                    <li>{{ value }}</li>
+                {% endfor %}
+            {% else %}
+                <li>There  dictionary.</li>
+            {% endif %}
+            
+        </ul>
+    </div>
+
+
+    {% endif %}
+    {% if unique_identification.time_present %}
+    <div class="data-div-report">
+        <p style="font-weight: bold;">
+            Possible time based data present in the dataset that can be directly associated with the patent. 
+        </p>
+        <ul>
+            {% if unique_identification.time_risk %}
+                {% for key, value in unique_identification.time_risk.items %}
+                <li>
+                <p><b>Risk:</b> {{ value.0}}</p>
+                <p><b>De-identification Technique</b> {{ value.1}}</p>
+                </li>
+                {% endfor %}
+            {% endif %}
+            
+        </ul>
+    </div>
+
+    {% endif %}
+    {% if unique_identification.fin_present %}
+    <div class="data-div-report">
+        <p style="font-weight: bold;">
+            Possible financial  data present in the dataset that can be directly associated with the patent. 
+        </p>
+        <ul>
+            {% if unique_identification.fin_risk %}
+                {% for key, value in unique_identification.fin_risk.items %}
+                <li>
+                    <p><b>Risk:</b> {{ value.0}}</p>
+                    <p><b>De-identification Technique</b> {{ value.1}}</p>
+                </li>
+                {% endfor %}
+            {% endif %}
+            
+        </ul>
+    </div>
+
+    {% endif %}
+    {% if unique_identification.demo_present %}
+    <div class="data-div-report">
+        <p style="font-weight: bold;">
+            Possible demographic data present in the dataset that can be directly associated with the patent. 
+        </p>
+        <ul>
+            {% if unique_identification.demo_risk %}
+                {% for key, value in unique_identification.demo_risk.items %}
+                <li>
+                    <p><b>Risk:</b> {{ value.0}}</p>
+                    <p><b>De-identification Technique</b> {{ value.1}}</p>
+                </li>
+                {% endfor %}
+            {% endif %}
+            
+        </ul>
+    </div>
+
+    {% endif %}
+</div>
+</div>
+
+{% endif %}
+
+{% if persecutor_risk.present %}
+<div class= "header2-report">
+    <div class="color-div-report">
+    <h2 class="left-h2">Persecutor Risk</h2>
+    </div>
+    
+
+    <div>
+        <p>
+            Persecutor risk is when a person (the persecutor) is trying to re-identify a specific individual that they
+            know is in the dataset. The persecutor may already know many details about the individual.
+        </p>
+        <p>
+            In this survey it was found that the dataset has a persecutor risk for the following reasons.
+        </p>
+        <ul>
+            {% if persecutor_risk.whole_population %}
+                <li>The dataset represents the large portion or whole population</li>{% endif %}
+            {% if persecutor_risk.generally_known %}
+                <li>It is generally known who is in the dataset</li>{% endif %}
+            {% if persecutor_risk.self_reveal %}
+                <li>The individuals are likely to self-reveal that they are part of the sample</li>{% endif %}
+        </ul>
+        <p>
+            Persecutor risk can be mitigated by sing only a subset of the greater dataset. By using only a subset a
+            persecutor now cannot be sure that the person they were trying to identify is still in the dataset. In some
+            cases such as very large dataset the benefits of removing mitigating the persecutor risk may not be worthwhile,
+            such as in the case of very large dataset link a census or very small datasets where little insight could be
+            gained if only a subset of the data was used.
+        </p>
+    </div>
+</div>
+    
+{% endif %}
+
+{% if k_anonymity.sufficient_k == False %}
+<div class= "header2-report">
+    <div class="color-div-report">
+        <h2 class="left-h2">k-Anonymity</h2>
+        <p><i><b>Current k-anonymity: </b>{{ k_anonymity.current_k }} </i></p>
+    </div>
+    <div>
+        <p>
+            k-anonymity is a property of a dataset where k is the number of entries in the dataset that cannot be
+            distinguished
+            from one another. To give an example if your data set has two rows that have all same fields then they cannot
+            be distinguished from one another. The k value of a dataset is the smallest group of entries that cannot be
+            distinguished from one another. We recommend that the k value is above 5.
+        </p>
+        <p>
+            The k value can be improved through two methods:
+        </p>
+        <ul>
+            <li>
+                <b>Suppression:</b> In this method, certain values of the attributes are redacted. All or only
+                some values of a column may be removed. Be aware if you chose to suppress information other column may
+                reveal the redacted information such as an entity with prostate cancer is known to be male.
+            </li>
+            <li>
+                <b>Generalization:</b> In this method, individual values of attributes are replaced with a broader category.
+                For
+                example, the value "19" of the attribute Age may be replaced by "≤ 20", the value "23" by "20 < Age ≤ 30",
+                etc.
+            </li>
+        </ul>
+        {% if k_anonymity.is_subset %}
+            This dataset is a subset of a larger dataset, this means that the k value can be calculated using not just
+            entries in the subset but in the larger dataset as well. This technique works because when someone tries to
+            identify someone in a dataset they cannot know with certainty that the person they want to identify looks like
+            in the dataset. This technique is called K-Map.
+        {% endif %}
+    </div>
+</div>
+    
+{% endif %}
+
+{% if pdf_format == False %}
+    <br>
+    <br>
+    
+    <div style="float: right; text-align: right">
+        <button
+                class="btn btn-secondary" hx-get="./page/3" hx-target="#page"
+                hx-swap="#page show:top" hx-push-url="true">Back
+        </button>
+        <button
+                class="btn btn-secondary" hx-get=".." hx-target="#page"
+                hx-swap="#page show:top" hx-push-url="true">Processes
+        </button>
+        <a class="btn btn-primary" href="./report/pdf" target="_blank">Print</a>
+    </div>
+{% endif %}
+
+
+

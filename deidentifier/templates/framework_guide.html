@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/framework_guide.css' %}" cache="10" />
+
+
+<!-- Header Section -->
+<div class="main">
+    <div class="main_container">
+        <div class="main_content">
+            <h1>Here's a step-by-step instructions to help you with the decision process</h1>
+            <h2>for de-identification of data.</h2>
+            <button class="main_btn">
+                <a href="/processes">
+                    Start Process
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="about">
+    <div class="about_container">
+        <div class="about_bottom_container">
+            <h3>Overview</h3>
+            <p>
+                The framework interacts with users to gather information about the
+                data and its attributes without directly accessing the actual data.
+                We have designed four sets of questions to collect the necessary details.
+                Below is the description of the sets and the questions within each set:
+            </p>
+
+            <div class="exp-section">
+                <h2>Set-1: Data Inventory
+
+                    <svg class="icon_tip" data-v-08f4a9d2="" width="19" height="10" viewBox="0 0 19 10" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9.49976L9.51001 0.00976562L0.0200195 9.49976H19Z" fill="#313131"></path>
+                    </svg>
+
+                </h2>
+                <div class="exp-content">
+                    <p>
+                        The first set of questions helps in identifying the types of data and the data fields that are
+                        present in the dataset.
+                    </p>
+
+                    <p class="inside_p"
+                        style="font-weight: 600; font-size: 18px; text-align: left; border-bottom: solid rgb(87, 81, 73);">
+                        Questions
+                    </p>
+                    <ol>
+                        <li>
+                            <span class="bold_extra">Do any fields contain unique identifiers?</span>
+
+                        </li>
+                        <li>
+                            <span class="bold_extra">Please select all the geographic attributes present in
+                                dataset?</span>
+
+                        </li>
+                        <li>
+                            <span class="bold_extra">Please select all the time related information present in
+                                dataset?</span>
+
+                        </li>
+                        <li>
+                            <span class="bold_extra">Please select all the information related to financial transactions
+                                present in dataset?</span>
+
+                        </li>
+                        <li>
+                            <span class="bold_extra">Please select all the demographic information present in
+                                dataset?</span>
+
+                        </li>
+                        <li>
+                            <span class="bold_extra">Are there any free-text or narrative fields?</span>
+
+                        </li>
+                    </ol>
+
+                    <p class="inside_p"
+                        style="font-weight: 600; font-size: 18px; text-align: left; border-bottom: solid rgb(87, 81, 73);">
+                        Outcomes
+                    </p>
+                    <ul>
+
+                        <li>
+                            <span>Categorize the data attributes based on the information provided by the user.</span>
+
+                        </li>
+                        <li>
+                            <span>Identify the most sensitive attributes (identifiers) that need to be protected.</span>
+
+                        </li>
+                        <li>
+
+                            <span>Assess the potential risk of re-identification based on combinations of
+                                attributes.</span>
+
+                        </li>
+                        <li>
+
+                            <span>Use this information to determine the appropriate de-identification techniques for
+                                each attribute.</span>
+
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="exp-section">
+                <h2>Set-2: Persecutor Risk
+
+                    <svg class="icon_tip" data-v-08f4a9d2="" width="19" height="10" viewBox="0 0 19 10" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9.49976L9.51001 0.00976562L0.0200195 9.49976H19Z" fill="#313131"></path>
+                    </svg>
+
+                </h2>
+                <div class="exp-content">
+                    <p>
+                        The following questions are relating to finding if the persecutor risk is applicable to the
+                        dataset. A persecutor risk is when the a person (the persecutor) is trying to identify specific
+                        individual that they know is in the dataset. The persecutor already has information about the
+                        person they are attempting to identify.
+                    </p>
+
+                    <p class="inside_p"
+                        style="font-weight: 600; font-size: 18px; text-align: left; border-bottom: solid rgb(87, 81, 73);">
+                        Questions
+                    </p>
+                    <ol>
+                        <li>
+                            <span class="bold_extra">The dataset represents the whole population (e.g., a population
+                                registry, or census) or has a large sampling fraction?</span>
+
+                        </li>
+                        <li>
+                            <span class="bold_extra">It generally know who participated in the study, such as an
+                                internal survey for a single business?</span>
+
+                        </li>
+                        <li>
+                            <span class="bold_extra">The individuals are likely to self-reveal that they are part of the
+                                sample? For example, subjects in clinical trials do generally inform their family,
+                                friends, and even acquaintances that they are participating in a trial.</span>
+
+                        </li>
+
+                    </ol>
+
+                    <p class="inside_p"
+                        style="font-weight: 600; font-size: 18px; text-align: left; border-bottom: solid rgb(87, 81, 73);">
+                        Outcomes
+                    </p>
+                    <ul>
+
+                        <li>
+                            <span>
+                                Helps assesses whether the dataset covers the entire population or a significant portion of it. If it does, 
+                                it implies that the dataset may contain more comprehensive and identifiable information about individuals.
+                            </span>
+
+                        </li>
+                        <li>
+                            <span>
+                                Raises awareness about the participants in the dataset and if there is a clear record of who took part, it increases the likelihood of identifying individuals.
+                            </span>
+
+                        </li>
+                        <li>
+
+                            <span>Assess the potential risk of re-identification based on combinations of
+                                attributes.</span>
+
+                        </li>
+                        <li>
+
+                            <span>
+                                Whether individuals are likely to disclose their participation in the dataset to others, such self-disclosure can impact the privacy and anonymity of the dataset.
+                            </span>
+
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            
+            <div class="exp-section">
+                <h2>Set-3: K-Anonymity
+
+                    <svg class="icon_tip" data-v-08f4a9d2="" width="19" height="10" viewBox="0 0 19 10" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9.49976L9.51001 0.00976562L0.0200195 9.49976H19Z" fill="#313131"></path>
+                    </svg>
+
+                </h2>
+                <div class="exp-content">
+                    <p>
+                        The following questions will be used to to determine if the characteristcs of their dataset
+                        that are related to K-Anonymity.
+                    </p>
+
+                    <p class="inside_p"
+                        style="font-weight: 600; font-size: 18px; text-align: left; border-bottom: solid rgb(87, 81, 73);">
+                        Questions
+                    </p>
+                    <ol>
+                        <li>
+                            Is your given dataset a subset of a larger dataset?
+                        </li>
+                        <li>
+                            What is the current K-Annonimity of the dataset?
+                        </li>
+                        <li>
+                            What is the K-Anonymity of the dataset when combined with the larger dataset?
+                        </li>
+                    </ol>
+
+                    <p class="inside_p"
+                        style="font-weight: 600; font-size: 18px; text-align: left; border-bottom: solid rgb(87, 81, 73);">
+                        Outcomes
+                    </p>
+                    <ul>
+
+                        <li>
+                            <span>Understanding the dataset's relationship with a larger dataset one can be essential in assessing K-Anonymity.</span>
+
+                        </li>
+                        <li>
+                            <span>The K-Anonymity of the dataset in its current state. It helps assess the level of privacy protection in the dataset.</span>
+
+                        </li>
+                        <li>
+
+                            <span>Assess the potential risk of re-identification based on combinations of
+                                attributes.</span>
+
+                        </li>
+                        <li>
+
+                            <span>The K-Anonymity of the provided dataset when integrated with the larger dataset and helps assessing the impact of combining datasets on privacy.</span>
+
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="about_bottom_container">
+            <h3 style="margin-top:20px;">How to use App ?</h3>
+            <p>Before the user can initiate the process, the user needs to log in to the application using the credentials provided by the admin.</p>
+            <div class="imgs">
+                <img src="{% static 'img/loginPage.png' %}" alt="loginPage">
+                <p>Enter the details provided by the admin</p>
+            </div>
+            <h4>Step-1: Create a Process</h4>
+            <div class="img-steps">
+                <div class="imgs">
+                    <img src="{% static 'img/step1.1.png' %}" alt="step1" >
+                    <p>Click on the start process button</p>
+                </div>
+                <div class="imgs">
+                    <img src="{% static 'img/step1.2.png' %}" alt="step1">
+                    <p>Click on the start new process</p>
+                </div>
+                <div class="imgs">
+                    <img src="{% static 'img/step1.3.png' %}" alt="step1">
+                    <p>Add process description and click save process</p>
+                </div>
+            </div>
+            <p>
+                The app lets you create multiple processes at the same time
+            </p>
+
+
+            <br>
+            <h4>Step-2: Fill all the answers</h4>
+            <div class="img-steps">
+                <div class="imgs">
+                    <img src="{% static 'img/step2.png' %}" alt="step1" width="600" height="300">
+                    <p>Fill the answers and complete the process</p>
+                </div>
+            </div>
+
+
+
+            <h4>Step-3: See the outcome and start new process</h4>
+            <div class="img-steps">
+                <div class="imgs">
+                    <img src="{% static 'img/step3.png' %}" alt="step1" width="600" height="600">
+                    <p>Review the report and start new process</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const iconToggles = document.querySelectorAll(".icon-toggle");
+        iconToggles.forEach(function (toggle) {
+            toggle.addEventListener("click", function () {
+                const targetId = toggle.getAttribute("data-target");
+                const slider = document.getElementById(targetId);
+                if (slider.style.display === "block") {
+                    slider.style.display = "none";
+                } else {
+                    slider.style.display = "block";
+                    setTimeout(function () {
+                        slider.style.display = "none";
+                    }, 4000); // Hide the slider after 4 seconds (4000 milliseconds)
+                }
+            });
+        });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".exp-section");
+
+        sections.forEach(section => {
+            const header = section.querySelector("h2");
+            const content = section.querySelector(".exp-content");
+
+            header.addEventListener("click", function () {
+                section.classList.toggle("active");
+                content.style.display = section.classList.contains("active") ? "block" : "none";
+            });
+        });
+    });
+</script>
+
+
+{% endblock content %}

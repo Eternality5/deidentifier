@@ -1,0 +1,68 @@
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>Login</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/login/login.css'%}" />
+        
+    </head>
+
+    
+    <body>
+        {%if messages%}
+            {%for messages in messages%}
+                
+    
+                <div id="slide-in-bar" class="slide-in-bar">
+                    <div class="wrapper">
+                        <div id="slide-in-content" class="slide-in-content">
+                            <p id="slider-helper">|</p>
+                            <p>
+                                {{messages}}&nbsp;
+                            </p>
+                            <span id="close-button" class="close-button">&times;</span>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+        {%endif%}
+        <div class="login">
+            <div class="login-container">
+                <div class="login-left">
+                    <div class= "login-header">
+                        <a href="">Frame-work</a>
+
+                    </div>
+                    <div class= "login-text">
+                        <a href="">SIGN IN</a>
+                        <p>Sign in to access the frame work </p>
+
+                    </div>
+                    <div class="login-form">
+                        <form  method="post">
+                            {% csrf_token %}
+                            <input type = "text" class= "login-form-input" name="username" placeholder="Username">
+                            <input type = "password" class= "login-form-input" name="password" placeholder="Password">
+                            <a href="">Forgot Password ?</a>
+                            <div class="button-wrap">
+                                <button type="submit" value="submit">Login</button>
+                            </div>  
+                        </form>
+                    </div>                     
+                </div>
+                <div class="login-right">
+
+                </div>
+            </div>  
+        </div>
+      
+
+
+        <script src="{%static 'css/main.js' %}"></script>
+    </body>
+</html>

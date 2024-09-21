@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/about.css' %}"/>
+
+    <!-- Header Section -->
+    <div class="main">
+        <div class="main_container">
+            <div class="main_content">
+                <h1>Our aim is to develop a decision support system</h1>
+                <h2>for de-identification of data.</h2>
+                <button class="main_btn">
+                    <a href="/processes">
+                        Start Process
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="about">
+        <div class="about_container">
+            <div class="about_left_container">
+                <p>Welcome to the De-identification Framework</p>
+                <h1>De-identification Decision</h1>
+                <h1>making made easy by </h1>
+                <h2>Framework</h2>
+            </div>
+
+            <div class="about_right_container">
+                <h3>Background</h3>
+                <p>Privacy and confidentiality are two interrelated factors that promote trust in
+                    healthcare environment. It promotes effective communication between
+                    patients and healthcare workers. On the other hand, health research often
+                    involves gathering, linking and analyzing information about people and
+                    their health. Without availability of data, advances in health science could
+                    be severely hampered.
+                </p>
+                <h3>Goals</h3>
+                <ul>
+                    <li>Understand the importance of privacy, data sharing and health research</li>
+                    <li>Understand the nature of decision support system and conformance review</li>
+                    <li>Design, build and test effectiveness of an user interface for a decision support system</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}

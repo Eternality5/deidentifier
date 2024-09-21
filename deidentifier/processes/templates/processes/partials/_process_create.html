@@ -1,0 +1,27 @@
+<div id="page" class="relative-position">
+    {% load crispy_forms_filters %}
+    <style>
+        .relative-position {
+            position: relative
+        }
+
+        .nav_buttons {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+
+    <h1>Process Details</h1>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="nav_buttons">
+            <button class="btn btn-secondary new_process_button" hx-target="#page"
+                    hx-get="{% url 'index' %}"
+                    role="button">Back
+            </button>
+            <button type="submit" class="btn btn-primary">Save Process</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+    
+    <div class="main">
+        <div class="main_container">
+            <div class="main_content">
+                <h1>De-identification</h1>
+                <h2> made easy !</h2>
+                <button class="main_btn">
+                    <a href="/processes">
+                        Start Process
+                    </a>
+                </button>
+            </div>
+            <div class="main_img--container">
+            </div>
+        </div>
+    </div>
+
+    <div class="about">
+        <div class="about_container">
+            <div class="about_content">
+                <p class="about_top">Welcome to the De-identification Framework
+                </p>
+                <h1 class="about_heading">De-identification Decision making</h1>
+                <h1 class="about_heading2"> made easy by Framework</h1>
+                <a href="" class="about_link">Read More</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

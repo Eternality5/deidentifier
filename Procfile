@@ -1,0 +1,1 @@
+web: gunicorn --chdir deidentifier deidentifier.wsgi:application

@@ -1,0 +1,61 @@
+[
+  {
+    "model": "processes.QuestionGroup",
+    "pk": 1,
+    "fields": {
+      "sequence_number": 1,
+      "title": "Example Question Group",
+      "description": "Example Description",
+      "help_tip": "Example Help Tip",
+      "source": "Example Source"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 1,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 1,
+      "question": "Boolean Question",
+      "help_tip": "Example Help Tip 1",
+      "is_compulsory": true,
+      "answer_format": "boolean"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 2,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 2,
+      "question": "Integer Answer",
+      "help_tip": "Example help tip 2",
+      "is_compulsory": true,
+      "answer_format": "choice1"
+    }
+  },
+  {
+    "model": "processes.AnswerSet",
+    "pk": 1,
+    "fields": {
+      "title": "Test answer set",
+      "description": "This answer set is for testing all the different question types are functioning as intended"
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 1,
+      "boolean_answer": true
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 2,
+      "string_answer": "A, B"
+    }
+  }
+]

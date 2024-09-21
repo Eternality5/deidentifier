@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content_wrapper %}
+
+    <style>
+        .content {
+            max-width: 1110px;
+            margin: auto;
+            padding: 20px;
+        }
+        .questions {
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .grey-box {
+            padding: 20px;
+            background-color: #F0F0F0;
+            min-height: 500px;
+            box-shadow: 5px 5px 5px 5px lightgrey;
+            display: grid;
+        }
+        .slider {
+            display: none;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            position: absoulte;
+        }
+
+        .header-report{
+            padding:10px;
+            margin-bottom:8px;
+            width: 100%;
+            min-height: 100px;
+            background-color:#192b45;
+            color:white;
+        }
+
+        .risk-report{
+            margin-top:20px;
+            display:flex;
+            padding:10px;
+            margin-bottom:8px;
+            width: 100%;
+            min-height: 100px;
+        }
+        .left-h2{
+            width:300px;
+            
+        }
+        .color-div-report{
+            border-radius:2px;
+            margin:0px 10px 10px 10px;
+            padding:20px 0 0 30px;
+            background-color:#d1d1d1;
+        }
+        .header2-report{
+            display:flex;
+            margin-top:20px;
+        }
+
+        .data-div-report {
+            margin:10px;
+            padding:5px;
+            border-style: groove;
+        }
+    </style>
+    <main class="content">
+        <div class="grey-box" id="page">
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+
+    <script>
+        function toggleSlider(sliderId) {
+            const slider = document.getElementById(sliderId);
+            if (slider.style.display === "block") {
+                slider.style.display = "none";
+            } else {
+                slider.style.display = "block";
+                
+            }
+        }
+    </script>
+
+{% endblock content_wrapper %}

@@ -1,0 +1,61 @@
+[
+  {
+    "model": "processes.QuestionGroup",
+    "pk": 2,
+    "fields": {
+      "sequence_number": 2,
+      "title": "Persecutor Risk",
+      "description": "The following questions are relating to finding if the persecutor risk is applicable to the dataset. A persecutor risk is when the a person (the persecutor) is trying to identify specific individual that they know is in the dataset. The persecutor already has information about the person they are attempting to identify.",
+      "help_tip": "If one of the following question is marked as true the dataset contains a persecutor risk. If there is a persecutor risk this needs to be managed and stricter recommendation will be given. The following article recommends using K-Anonymity when a persecutor threat is present, the disadvantage of this is it reduces the utility otherwise if no threat is present we will use a k-map instead, if possible.",
+      "source": "El Emam K, Dankar FK. Protecting privacy using k-anonymity. J Am Med Inform Assoc. 2008 Sep-Oct;15(5):627-37. doi: 10.1197/jamia.M2716. Epub 2008 Jun 25. PMID: 18579830; PMCID: PMC2528029."
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 201,
+    "fields": {
+      "question_group_id": 2,
+      "sequence_number": 1,
+      "question": "The dataset represents the whole population (e.g., a population registry, or census) or has a large sampling fraction?",
+      "help_tip": "If the whole population is being disclosed then the persecutor would have certainty that their target is in the disclosed dataset. Also, a large sampling fraction means that their target is very likely to be in the disclosed dataset.",
+      "is_compulsory": true,
+      "answer_format": "boolean"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 202,
+    "fields": {
+      "question_group_id": 2,
+      "sequence_number": 2,
+      "question": "It generally know who participated in the study, such as an internal survey for a single business?",
+      "help_tip": "The sample may be a dataset from an interview survey conducted in a company and it is generally known who participated in these interviews because the participants missed half a day of work. In such a case it is known within the company, and to an internal intruder, who is in the disclosed dataset.",
+      "is_compulsory": true,
+      "answer_format": "boolean"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 203,
+    "fields": {
+      "question_group_id": 2,
+      "sequence_number": 3,
+      "question": "The individuals are likely to self-reveal that they are part of the sample? For example, subjects in clinical trials do generally inform their family, friends, and even acquaintances that they are participating in a trial.",
+      "help_tip": "Subjects in clinical trials do generally inform their family, friends, and even acquaintances that they are participating in a trial. One of the acquaintances may attempt to re-identify one of these self-revealing subjects. However, it is not always the case that individuals do know that their data is in a dataset. For example, for studies where consent has been waived or where patients provide broad authorization for their data or tissue samples to be used in research, the patients may not know that their data is in a specific dataset, providing no opportunity for self-revealing their inclusion.",
+      "is_compulsory": true,
+      "answer_format": "boolean"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 301,
+    "fields": {
+      "question_group_id": 2,
+      "sequence_number": 4,
+      "question": "Is your given dataset a subset of a larger dataset?",
+      "help_tip": "Is your dataset a subset of census data or do you posses a greater dataset that your participants are part of.",
+      "is_compulsory": true,
+      "answer_format": "boolean"
+    }
+  }
+]

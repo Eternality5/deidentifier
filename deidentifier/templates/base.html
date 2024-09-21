@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Framework</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon.png' %}">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}"/>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <script src="{% static 'htmx.min.js' %}" defer></script>
+
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+{% include 'partials/_navbar.html' %}
+
+{% block content_wrapper %}
+
+    {% block content %}
+    {% endblock content %}
+
+{% endblock content_wrapper %}
+
+{% comment %} {% include 'partials/_footer.html' %} {% endcomment %}
+
+<script src="{% static 'css/main.js' %}"></script>
+
+</body>
+</html>

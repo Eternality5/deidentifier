@@ -1,0 +1,86 @@
+[
+  {
+    "model": "processes.QuestionGroup",
+    "pk": 1,
+    "fields": {
+      "sequence_number": 1,
+      "title": "Data Inventory",
+      "description": "This section is simply identifying the types of data and the data fields that need to be de-identified.",
+      "help_tip": "The names of the columns will be cross-referenced with a database of risky column name.",
+      "source": "https://www.privitar.com/blog/k-anonymity-an-introduction/"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 101,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 1,
+      "question": "Do any fields contain unique identifiers?",
+      "help_tip": "A unique identifier is a piece of information assigned to an individual that is distinct and specific to them. Examples of a unique identifier are customer ID, membership number or account number.",
+      "is_compulsory": true,
+      "answer_format": "boolean"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 102,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 2,
+      "question": "Please select all the geographic attributes present in dataset?",
+      "help_tip": "Fields that might indicate geographic locations like addresses, postal codes, or city names.",
+      "is_compulsory": true,
+      "answer_format": "choice1"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 103,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 3,
+      "question": "Please select all the time related information present in dataset?",
+      "help_tip": "Time related information includes attributes that record when events occurred or when data points were collected.",
+      "is_compulsory": true,
+      "answer_format": "choice2"
+    }
+  },
+
+  {
+    "model": "processes.Question",
+    "pk": 104,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 4,
+      "question": "Please select all the information related to financial transactions present in dataset?",
+      "help_tip": "Fields related to financial transactions, insurance information, billing records, etc.",
+      "is_compulsory": true,
+      "answer_format": "choice3"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 105,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 5,
+      "question": "Please select all the demographic information present in dataset?",
+      "help_tip": "Fields such as age, gender, ethnicity, etc.",
+      "is_compulsory": true,
+      "answer_format": "choice4"
+    }
+  },
+  {
+    "model": "processes.Question",
+    "pk": 106,
+    "fields": {
+      "question_group_id": 1,
+      "sequence_number": 6,
+      "question": "Are there any free-text or narrative fields?",
+      "help_tip": "Fields that might contain unstructured or semi-structured data, such as medical notes or comments.",
+      "is_compulsory": true,
+      "answer_format": "boolean"
+    }
+  }
+]

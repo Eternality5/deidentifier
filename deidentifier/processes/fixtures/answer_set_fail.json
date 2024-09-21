@@ -1,0 +1,114 @@
+[
+  {
+    "model": "processes.AnswerSet",
+    "pk": 1,
+    "fields": {
+      "title": "Fail Answer Set",
+      "description": "This is a test process which should fail"
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 101,
+      "boolean_answer": false
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 102,
+      "string_answer": "first_name;sex"
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 103,
+      "string_answer": ""
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 104,
+      "string_answer": "disease"
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 2,
+      "question_id": 105,
+      "string_answer": "disease"
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 2,
+      "question_id": 106,
+      "string_answer": "disease"
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 2,
+      "question_id": 107,
+      "boolean_answer": false
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 201,
+      "boolean_answer": true
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 202,
+      "boolean_answer": true
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 203,
+      "boolean_answer": true
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 301,
+      "boolean_answer": true
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 302,
+      "int_answer": 3
+    }
+  },
+  {
+    "model": "processes.Answer",
+    "fields": {
+      "answer_set": 1,
+      "question_id": 303,
+      "int_answer": 3
+    }
+  }
+]

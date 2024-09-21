@@ -1,0 +1,325 @@
+{% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+<div id="page">
+    <style>
+        details {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: 0.5em 0.5em 0;
+            margin-bottom: 0.5em;
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -0.5em -0.5em 0;
+            padding: 0.5em;
+        }
+
+        details[open] {
+            padding: 0.5em;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 0.5em;
+        }
+        #ca {
+            display: none;
+        }
+    </style>
+
+    <h1>
+        {{ question_group.sequence_number }}. {{ question_group.title }} 
+        <span style="cursor: pointer;" title="{{ question_group.help_tip }}" class="glyphicon glyphicon-info-sign" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="#313131"></circle>
+                <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="50" fill="white">?</text>
+              </svg>
+        </span>
+    </h1>
+    <div class="icon-container">
+        <p>{{ question_group.description }}
+            <span  
+                onclick="toggleSlider('slider')"
+                style="cursor: pointer;"  
+                class="glyphicon glyphicon-info-sign" 
+                aria-hidden="true"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="#313131"></circle>
+                    <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="40" fill="white">i</text>
+                </svg>
+                
+            </span>
+        </p> 
+        <div class="slider" id="slider">
+            <p><b>Source: </b>{{ question_group.source }}</p>
+        </div>
+    </div>
+    
+    
+    <form action="." method="POST">
+        <div class="questions">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            {% for question, answer_form in question_answer_pairs %}
+                {# Question information #}
+                <h3>Question {{ question_group.sequence_number }}.{{ question.sequence_number }}</h3>
+
+                <div class="icon-container">
+                    <p>{{ question.question }}
+                        <span  
+                            onclick="toggleSlider('slider'+{{question.sequence_number}})"
+
+                            style="cursor: pointer;"  
+                            class="glyphicon glyphicon-info-sign" 
+                            aria-hidden="true"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="40" fill="#313131"></circle>
+                                <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="40" fill="white">i</text>
+                            </svg>
+                        </span>
+                    </p> 
+                    <div class="slider" id="slider{{question.sequence_number}}">
+                        <p>{{ question.help_tip }}</p>
+                    </div>
+                </div>
+                
+                {% if question.answer_format == "choice1" %}
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="A"> Location of healthcare
+                        providers.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="B"> A broader geographic area
+                        such as a state, province, county or city.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="C"> The country where the health
+                        data originates or is relevant.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="D"> Postal or ZIP code
+                        information.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="E"> Geographic area covered by a
+                        healthcare provider.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="F"> Location where a patient
+                        lives.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="G"> Geographic regions defined
+                        for tracking and monitoring disease outbreaks.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="H"> Geographic attributes related
+                        to environmental factors, such as air quality, water sources, and pollution levels.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="I"> Information about a person's
+                        recent travel, including destinations visited.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="J"> Locations of pharmacies and
+                        drugstores.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="K"> Data on the distribution of
+                        healthcare resources.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="L"> Geographic information
+                        related to emergency response services.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="M"> Additional geospatial layers,
+                        such as land use, transportation networks, and socioeconomic data.</label><br>
+                    <label><input class="checkbox-set-1 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="N"> Any other geographic
+                        location.</label><br>
+                    
+                    <div id= "ca">
+                        {{ answer_form.multiple_answer }}
+                    </div>
+
+                {% elif question.answer_format == "choice2" %}
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="A"> Date of Birth &#40;DOB&#41;:
+                        The birthdate of a patient.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="B"> Date of Admission &#40;DOA&#41;:
+                        The date a patient is admitted.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="C"> Date of Discharge &#40;DOD&#41;:
+                        The date a patient is discharged.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="D"> Date of Encounter &#40;DOE&#41;:
+                        The date of a healthcare encounter, which can include appointments, consultations, or
+                        visits.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="E"> Date of Diagnosis &#40;DODx&#41;:
+                        The date when a medical condition or disease was diagnosed.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="F"> Date of Procedure &#40;DOP&#41;:
+                        The date when a medical procedure or surgery was performed.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="G"> Date of Prescription &#40;DORx&#41;:
+                        The date when a medication or treatment plan was prescribed.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="H"> Date of Test/Examination
+                        &#40;DOT&#41;: The date when medical tests, screenings, or examinations were conducted.</label>
+                    <br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="I"> Date of Immunization &#40;DOI&#41;:
+                        The date when a vaccination or immunization was administered.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="J"> Onset Date: The date when
+                        symptoms of a medical condition first appeared.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="K"> Follow-Up Date: The date
+                        scheduled for a follow-up appointment or consultation.</label><br>
+                    <label><input class="checkbox-set-2 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="L"> Any other time
+                        related.</label><br>
+                    
+                    <div id= "ca">
+                        {{ answer_form.multiple_answer }}
+                    </div>
+                {% elif question.answer_format == "choice3" %}
+
+                    <label><input class="checkbox-set-3 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="A"> Transaction History: A record
+                        of past transactions, including dates, amounts, and descriptions.</label><br>
+                    <label><input class="checkbox-set-3 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="B"> Transaction Status: The
+                        status of a transaction at different points in time &#40;e.g., pending, completed, canceled&#41;.</label>
+                    <br>
+                    <label><input class="checkbox-set-3 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="C"> Payment Frequency:
+                        Information about the frequency of recurring payments, such as weekly, bi-weekly, or
+                        semi-annually.</label><br>
+                    <label><input class="checkbox-set-3 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="D"> Any other financial
+                        transactions, insurance information, billing records, etc.</label><br>
+    
+                    <div id= "ca" >
+                        {{ answer_form.multiple_answer }}
+                    </div>
+                {% elif question.answer_format == "choice4" %}
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="A"> Age: The calculated age of an
+                        individual based on their date of birth.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="B"> Generation: Categorizations
+                        based on birth years, such as Baby Boomers, Generation X, Millennials, and Generation Z.</label>
+                    <br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="C"> Age Group: Grouping
+                        individuals into predefined age ranges.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="D"> Marital Status: Current
+                        marital status, such as single, married, divorced, or widowed.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="E"> Any Employment
+                        History.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="F"> Immigration Date: The date
+                        when an individual immigrated to a new country.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="G"> Event Dates: Dates associated
+                        with significant life events, such as moving to a new location, starting or ending
+                        relationships, or major life transitions.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="H"> Historical Demographic Data:
+                        Temporal data related to demographic changes over time, such as population growth, birth rates,
+                        and death rates.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="I"> Fertility Timing: Dates
+                        related to childbirth, including the birthdate of children and the timing of
+                        pregnancies.</label><br>
+                    <label><input class="checkbox-set-4 form-check-input" type="checkbox"
+                                  name="choices_{{ question.sequence_number }}" value="J"> Any other demographic
+                        information in data typically includes attributes related to the characteristics of individuals.</label>
+                    <br>
+
+                    <div id= "ca">
+                        {{ answer_form.multiple_answer }}
+                    </div>
+      
+                {% elif question.answer_format == "integer" %}
+                    {{ answer_form.int_answer }}
+                {% elif question.answer_format == "string" %}
+                    {{ answer_form.string_answer }}
+                {% elif question.answer_format == "boolean" %}
+                    {{ answer_form.boolean_answer }}
+                {% elif question.answer_format == "list" %}
+                    {{ answer_form.string_answer }}
+                {% endif %}
+                <span class="hidden">{{ answer_form.id }}</span>
+
+                <br><br>
+            {% endfor %}
+
+        </div>
+        
+        <div style="float: right">
+            <button class="btn btn-secondary" hx-get="{{ previous_page_number }}" hx-target="#page"
+                    hx-swap="#page show:top" hx-push-url="true">Back
+            </button>
+            <button class="btn btn-secondary" hx-get="." hx-target="#page"
+                    hx-swap="#page reload  show:top" hx-push-url="true">Cancel
+            </button>
+            <input class="btn btn-primary" type="submit" value="Save & Next"/>
+        </div>
+
+    </form>
+
+    <script>
+
+        function updateTextarea(checkboxes, textarea) {
+            const selectedValues = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            textarea.value = selectedValues.join(", ");
+        }
+
+        function checkCheckboxesFromTextarea(checkboxes, textarea) {
+            const textareaValue = textarea.value;
+            const selectedValues = textareaValue.split(", ").map(value => value.trim());
+    
+            checkboxes.forEach(function (checkbox) {
+                const checkboxValue = checkbox.value;
+                checkbox.checked = selectedValues.includes(checkboxValue);
+            });
+        }
+
+        function initializeScript() {
+            const checkboxSets = [
+                {
+                    checkboxes: document.querySelectorAll('.checkbox-set-1'),
+                    textarea: document.getElementById("id_form-1-multiple_answer"),
+                },
+                {
+                    checkboxes: document.querySelectorAll('.checkbox-set-2'),
+                    textarea: document.getElementById("id_form-2-multiple_answer"),
+                },
+                {
+                    checkboxes: document.querySelectorAll('.checkbox-set-3'),
+                    textarea: document.getElementById("id_form-3-multiple_answer"),
+                },
+                {
+                    checkboxes: document.querySelectorAll('.checkbox-set-4'),
+                    textarea: document.getElementById("id_form-4-multiple_answer"),
+                },
+            ];
+
+            checkboxSets.forEach(function (set) {
+
+                checkCheckboxesFromTextarea(set.checkboxes, set.textarea);
+                set.checkboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener("change", function () {
+                        updateTextarea(set.checkboxes, set.textarea);
+                    });
+                });
+            });
+        }
+
+        // Call the initialization function when the page loads and after htmx requests
+        window.addEventListener("load", initializeScript);
+        document.body.addEventListener("htmx:afterSwap", initializeScript);
+    </script>
+
+</div>

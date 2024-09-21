@@ -1,0 +1,68 @@
+<div id="page" class="position-relative">
+
+    <style>
+        .new_process_button {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .round-corners {
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .position-relative {
+            position: relative
+        }
+
+        .action-buttons {
+            width: 1%;
+            white-space: nowrap
+        }
+        @media (max-width: 450px) {
+            .text-size{
+                font-size: 12px;
+            }
+            .button-text{
+                font-size: 8px;
+            }
+        }
+    </style>
+
+    <h1>Processes</h1>
+    <div class="table-responsive text-size">
+        <table class="table round-corners">
+            <thead>
+            <tr>
+                <th scope="col">Processes Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for answer_set in latest_answer_set_list %}
+                <tr>
+                    <td>{{ answer_set.title }}</td>
+                    <td>{{ answer_set.description }}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-secondary button-text" hx-get="{% url 'update' answer_set.id %}"
+                                hx-target="#page" hx-replace-url="true">Show
+                        </button>
+                        <button class="btn btn-danger button-text" hx-delete="delete/{{ answer_set.id }}" hx-target="#page"
+                                hx-swap="#page"
+                                hx-confirm="Are you sure you want to delete this process?">
+                            Delete
+                        </button>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn btn-primary new_process_button text-size" hx-get="{% url 'create' %}" hx-swap="show:window:top"
+            hx-target="#page" hx-push-url="true"
+            role="button">Start new process
+    </button>
+    
+</div>
